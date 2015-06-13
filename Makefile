@@ -8,4 +8,4 @@ SOURCES +=
 all: $(SOURCES)
 
 .sm.java:
-	$(SMC) -java $(<)
+	$(SMC) -java $(<) $@
