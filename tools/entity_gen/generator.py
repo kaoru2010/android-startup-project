@@ -57,6 +57,24 @@ class AndroidGenerator(object):
     def addProperty(self, prop):
         prop.accept(self)
 
+    def addObject(self, name, ref):
+        self.buf += [
+            BlankLine(),
+            'private ' + ref.name + ' ' + name + ';',
+            BlankLine(),
+            'public ' + ref.name + ' get' + self.capitalize(name) + '() {',
+            '    return this.' + name + ';',
+            '}',
+            BlankLine(),
+            'public void set' + self.capitalize(name) + '(' + ref.name + ' value) {',
+            '    this.' + name + ' = value;',
+            '}',
+        ]
+
+        self.gson += [
+            'this.' + name + ' = new ' + ref.name + '(element.get("' + name + '").getAsJsonObject());',
+        ]
+
     def addArray(self, name, ref):
         self.buf += [
             BlankLine(),

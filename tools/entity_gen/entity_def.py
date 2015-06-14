@@ -15,6 +15,10 @@ class Entity(EntityBase):
         else:
             generator.reference(self.ref)
 
+class ObjectProperty(EntityBase):
+    def accept(self, generator):
+        generator.addObject(self.name, self.ref)
+
 class ArrayProperty(EntityBase):
     def accept(self, generator):
         generator.addArray(self.name, self.ref)
